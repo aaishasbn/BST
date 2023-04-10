@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "TiktokSystemUI",
+            "request": "launch",
+            "mainClass": "Tree.TiktokSystemUI",
+            "projectName": "TokTik_97224873"
+        },
+        {
+            "type": "java",
             "name": "TiktokSystem",
             "request": "launch",
             "mainClass": "Tree.TiktokSystem",
