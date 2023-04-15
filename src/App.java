@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class App extends JFrame implements ActionListener {
 
-    private TiktokSystem system;
+    private TiktokApp system;
     private JLabel accountLabel, descriptionLabel, titleLabel, fileLabel, likesLabel;
     private JTextField accountField, descriptionField, titleField, fileField, likesField;
     private JTextArea outputArea;
@@ -14,17 +14,18 @@ public class App extends JFrame implements ActionListener {
 
     public App() {
         // Set up the window
-        setTitle("Tiktok System");
+        setTitle("Tiktok App");
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
         // Set up the TiktokSystem
-        system = new TiktokSystem();
+        system = new TiktokApp();
 
         // Add components to the window
         JPanel inputPanel = new JPanel(new GridLayout(4, 2));
         accountLabel = new JLabel("Account:");
+        accountLabel.setForeground(Color.BLUE); 
         inputPanel.add(accountLabel);
         accountField = new JTextField();
         inputPanel.add(accountField);
@@ -40,24 +41,33 @@ public class App extends JFrame implements ActionListener {
         inputPanel.add(fileLabel);
         fileField = new JTextField();
         inputPanel.add(fileField);
-        likesLabel = new JLabel("Likes:");
+        likesLabel = new JLabel("Likes: ", new ImageIcon("download.png"), JLabel.LEFT);
         inputPanel.add(likesLabel);
         likesField = new JTextField();
         inputPanel.add(likesField);
         add(inputPanel, BorderLayout.NORTH);
+        
 
         JPanel buttonPanel = new JPanel(new GridLayout(1, 4));
         addButton = new JButton("Add Account");
+        addButton.setBackground(Color.MAGENTA);
+        addButton.setForeground(Color.WHITE);
         addButton.addActionListener(this);
         buttonPanel.add(addButton);
         deleteButton = new JButton("Delete Account");
+        deleteButton.setBackground(Color.CYAN); 
+        deleteButton.setForeground(Color.BLACK);
         deleteButton.addActionListener(this);
         buttonPanel.add(deleteButton);
         addPostButton = new JButton("Add Post");
         addPostButton.addActionListener(this);
+        addPostButton.setBackground(Color.MAGENTA); // Set background color to green
+        addPostButton.setForeground(Color.WHITE);
         buttonPanel.add(addPostButton);
         viewButton = new JButton("View Accounts");
         viewButton.addActionListener(this);
+        viewButton.setBackground(Color.CYAN); // Set background color to blue
+        viewButton.setForeground(Color.BLACK);
         buttonPanel.add(viewButton);
         add(buttonPanel, BorderLayout.CENTER);
 
