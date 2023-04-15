@@ -54,7 +54,7 @@ public class App extends JFrame implements ActionListener {
         
 
         JPanel buttonPanel = new JPanel(new GridLayout(1, 2));
-        addButton = new Roundedbutton("Add Account:");
+        addButton = new Roundedbutton("Add Account:got");
         addButton.setBackground(Color.BLACK);
         addButton.setForeground(Color.WHITE);
         addButton.addActionListener(this);
