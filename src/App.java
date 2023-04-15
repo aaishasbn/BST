@@ -3,6 +3,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 public class App extends JFrame implements ActionListener {
 
@@ -15,7 +17,7 @@ public class App extends JFrame implements ActionListener {
     public App() {
         // Set up the window
         setTitle("Tiktok App");
-        setSize(600, 400);
+        setSize(500, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -23,54 +25,56 @@ public class App extends JFrame implements ActionListener {
         system = new TiktokApp();
 
         // Add components to the window
-        JPanel inputPanel = new JPanel(new GridLayout(4, 2));
+        JPanel inputPanel = new JPanel(new GridLayout(5, 2));
         accountLabel = new JLabel("Account:");
-        accountLabel.setForeground(Color.BLUE); 
+        accountLabel.setForeground(Color.BLACK); 
         inputPanel.add(accountLabel);
         accountField = new JTextField();
         inputPanel.add(accountField);
         descriptionLabel = new JLabel("Profile Description:");
+        descriptionLabel.setForeground(Color.BLACK);
         inputPanel.add(descriptionLabel);
         descriptionField = new JTextField();
         inputPanel.add(descriptionField);
         titleLabel = new JLabel("Post Title:");
+        titleLabel.setForeground(Color.BLACK);
         inputPanel.add(titleLabel);
         titleField = new JTextField();
         inputPanel.add(titleField);
         fileLabel = new JLabel("Video File:");
+        fileLabel.setForeground(Color.BLACK);
         inputPanel.add(fileLabel);
         fileField = new JTextField();
         inputPanel.add(fileField);
-        likesLabel = new JLabel("Likes: ", new ImageIcon("download.png"), JLabel.LEFT);
+        likesLabel = new JLabel("Likes: ", new ImageIcon("download.jpg"), JLabel.LEFT);
         inputPanel.add(likesLabel);
         likesField = new JTextField();
         inputPanel.add(likesField);
         add(inputPanel, BorderLayout.NORTH);
         
 
-        JPanel buttonPanel = new JPanel(new GridLayout(1, 4));
-        addButton = new JButton("Add Account");
-        addButton.setBackground(Color.MAGENTA);
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 2));
+        addButton = new Roundedbutton("Add Account:");
+        addButton.setBackground(Color.BLACK);
         addButton.setForeground(Color.WHITE);
         addButton.addActionListener(this);
         buttonPanel.add(addButton);
-        deleteButton = new JButton("Delete Account");
-        deleteButton.setBackground(Color.CYAN); 
+        deleteButton = new Roundedbutton("Delete Account");
+        deleteButton.setBackground(Color.WHITE); 
         deleteButton.setForeground(Color.BLACK);
         deleteButton.addActionListener(this);
         buttonPanel.add(deleteButton);
-        addPostButton = new JButton("Add Post");
+        addPostButton = new Roundedbutton("Add Post");
         addPostButton.addActionListener(this);
-        addPostButton.setBackground(Color.MAGENTA); // Set background color to green
+        addPostButton.setBackground(Color.BLACK); // Set background color to green
         addPostButton.setForeground(Color.WHITE);
         buttonPanel.add(addPostButton);
-        viewButton = new JButton("View Accounts");
+        viewButton = new Roundedbutton("View Accounts");
         viewButton.addActionListener(this);
-        viewButton.setBackground(Color.CYAN); // Set background color to blue
+        viewButton.setBackground(Color.WHITE); // Set background color to blue
         viewButton.setForeground(Color.BLACK);
         buttonPanel.add(viewButton);
         add(buttonPanel, BorderLayout.CENTER);
-
         outputArea = new JTextArea();
         outputArea.setEditable(false);
         add(new JScrollPane(outputArea), BorderLayout.SOUTH);
