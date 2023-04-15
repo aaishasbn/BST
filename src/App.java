@@ -106,7 +106,7 @@ outputArea.setText("List of accounts:\n" + sb.toString());
 }
 
 public static void main(String[] args) {
-    TiktokSystemUI ui = new TiktokSystemUI();
+    App ui = new App();
   
     ui.setVisible(true);
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 /**
  * This class represents a Tiktok system which manages Tiktok accounts and their posts.
  */
-public class TiktokSystem {
+public class TiktokApp {
 /**
      * The root node of the binary search tree storing the Tiktok accounts.
      */
@@ -190,28 +190,28 @@ public class TiktokSystem {
     }
 
     public static void main(String[] args) {
-        TiktokSystem system = new TiktokSystem();
-        system.addAccount("johndoe", "I love making Tiktok videos!");
-        system.addAccount("janedoe", "Follow me for more dancing videos!");
-        system.addPost("johndoe", "My first Tiktok video", "video1.mp4", 100);
-        system.addPost("johndoe", "My second Tiktok video", "video2.mp4", 200);
-        system.addPost("janedoe", "My first dancing video", "video3.mp4", 150);
+        TiktokApp system = new TiktokApp();
+        system.addAccount("Mary", "Had a little lamb!");
+        system.addAccount("Bob", "I am a minion!");
+        system.addPost("Mary", "Lamb video", "video1.mp4", 100);
+        system.addPost("Mary", "Lamb jumping video", "video2.mp4", 200);
+        system.addPost("Bob", "Flossing video", "video3.mp4", 150);
         ArrayList<String> accounts = system.listAccounts();
         System.out.println("List of accounts:");
         for (String account : accounts) {
             System.out.println(account);
         }
-        String profileDescription = system.findProfileDescription("johndoe");
-        System.out.println("\nProfile description for johndoe:");
+        String profileDescription = system.findProfileDescription("Mary");
+        System.out.println("\nProfile description for Mary:");
         System.out.println(profileDescription);
-        ArrayList<Post> posts = system.getPosts("johndoe");
-        System.out.println("\nList of posts for johndoe:");
+        ArrayList<Post> posts = system.getPosts("Mary");
+        System.out.println("\nList of posts for Mary:");
         for (Post post : posts) {
             System.out.println(post.title + " " + post.videoClipFile + " " + post.numLikes);
         }
-        system.deleteAccount("johndoe");
+        system.deleteAccount("Mary");
         accounts = system.listAccounts();
-        System.out.println("\nList of accounts after deleting johndoe:");
+        System.out.println("\nList of accounts after deleting Mary:");
         for (String account : accounts) {
             System.out.println(account);
         }
