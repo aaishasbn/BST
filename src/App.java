@@ -5,7 +5,9 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-
+/**
+ * This class implements a graphical user interface for a simple TikTok-like system.
+ */
 public class App extends JFrame implements ActionListener {
 
     private TiktokApp system;
@@ -13,7 +15,9 @@ public class App extends JFrame implements ActionListener {
     private JTextField accountField, descriptionField, titleField, fileField, likesField;
     private JTextArea outputArea;
     private JButton addButton, deleteButton, addPostButton, viewButton;
-
+  /**
+     * Creates a new instance of the App class, which sets up the window and initializes the TiktokSystem.
+     */
     public App() {
         // Set up the window
         setTitle("Tiktok App");
@@ -54,7 +58,7 @@ public class App extends JFrame implements ActionListener {
         
 
         JPanel buttonPanel = new JPanel(new GridLayout(1, 2));
-        addButton = new Roundedbutton("Add Account:got");
+        addButton = new Roundedbutton("Add Account:");
         addButton.setBackground(Color.BLACK);
         addButton.setForeground(Color.WHITE);
         addButton.addActionListener(this);
@@ -79,17 +83,37 @@ public class App extends JFrame implements ActionListener {
         outputArea.setEditable(false);
         add(new JScrollPane(outputArea), BorderLayout.SOUTH);
     }
-
+/**
+     * Performs the specified action when a button is pressed.
+     * 
+     * @param e the ActionEvent representing the button press
+     */
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addButton) {
             String account = accountField.getText();
             String description = descriptionField.getText();
+            if (account.isEmpty() || description.isEmpty()) {
+                outputArea.setText("Error: please fill in both fields.");
+                return;
+            }
+            if (system.getAccount(account) != null) {
+                outputArea.setText("Error: account already exists.");
+                return;
+            }
             system.addAccount(account, description);
             accountField.setText("");
             descriptionField.setText("");
             outputArea.setText("Account added:\n" + account + "\n");
         } else if (e.getSource() == deleteButton) {
             String account = accountField.getText();
+            if (account.isEmpty()) {
+                outputArea.setText("Error: please enter an account name.");
+                return;
+            }
+            if (system.getAccount(account) == null) {
+                outputArea.setText("Error: account does not exist.");
+                return;
+            }
             system.deleteAccount(account);
             accountField.setText("");
             descriptionField.setText("");
@@ -98,7 +122,22 @@ public class App extends JFrame implements ActionListener {
             String account = accountField.getText();
             String title = titleField.getText();
             String file = fileField.getText();
-            int likes = Integer.parseInt(likesField.getText());
+            String likesStr = likesField.getText();
+            if (account.isEmpty() || title.isEmpty() || file.isEmpty() || likesStr.isEmpty()) {
+                outputArea.setText("Error: please fill in all fields.");
+                return;
+            }
+            if (system.getAccount(account) == null) {
+                outputArea.setText("Error: account does not exist.");
+                return;
+            }
+            int likes;
+            try {
+                likes = Integer.parseInt(likesStr);
+            } catch (NumberFormatException ex) {
+                outputArea.setText("Error: likes must be a number.");
+                return;
+            }
             system.addPost(account, title, file, likes);
             titleField.setText("");
             fileField.setText("");
@@ -109,15 +148,15 @@ public class App extends JFrame implements ActionListener {
             if (accounts.isEmpty()) {
                 outputArea.setText("No accounts found.");
             } else {
-                StringBuilder
-sb = new StringBuilder();
-for (String account : accounts) {
-sb.append(account).append("\n");
-}
-outputArea.setText("List of accounts:\n" + sb.toString());
-}
-}
-}
+                StringBuilder sb = new StringBuilder();
+                for (String account : accounts) {
+                    sb.append(account).append("\n");
+                }
+                outputArea.setText("List of accounts:\n" + sb.toString());
+            }
+        }
+    }
+    
 
 public static void main(String[] args) {
     App ui = new App();

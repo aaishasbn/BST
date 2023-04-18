@@ -56,6 +56,23 @@ public class TiktokApp {
      * @param account the account name
      * @param profileDescription the profile description
      */
+    public BSTNode getAccount(String account) {
+        return getAccountHelper(root, account);
+    }
+    
+    private BSTNode getAccountHelper(BSTNode node, String account) {
+        if (node == null) {
+            return null;
+        }
+        if (account.equals(node.account)) {
+            return node;
+        } else if (account.compareTo(node.account) < 0) {
+            return getAccountHelper(node.left, account);
+        } else {
+            return getAccountHelper(node.right, account);
+        }
+    }
+    
     public void addAccount(String account, String profileDescription) {
         root = addAccountHelper(root, account, profileDescription);
     }
