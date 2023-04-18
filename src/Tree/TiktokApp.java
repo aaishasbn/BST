@@ -59,6 +59,12 @@ public class TiktokApp {
     public BSTNode getAccount(String account) {
         return getAccountHelper(root, account);
     }
+    /** private helper method recursively adds a new Tiktok account with the given account name and profile description.
+@param node the root of the subtree to add the account to
+@param account the account name
+@param profileDescription the profile description
+@return the root of the updated subtree
+*/
     
     private BSTNode getAccountHelper(BSTNode node, String account) {
         if (node == null) {
@@ -188,7 +194,13 @@ public class TiktokApp {
             return getPostsHelper(node.right, account);
         }
     }
-
+/**
+ *  adds a new Tiktok post to the account with the given account name.
+ * @param account the account name
+ * @param title the post title
+ * @param videoClipFile the video clip file name
+ * @param numLikes the number of likes for the post
+ */
     public void addPost(String account, String title, String videoClipFile, int numLikes) {
         addPostHelper(root, account, title, videoClipFile, numLikes);
     }
@@ -205,6 +217,39 @@ public class TiktokApp {
             addPostHelper(node.right, account, title, videoClipFile, numLikes);
         }
     }
+    /**
+ * This method returns the total number of likes for all the posts of the account with the given account name.
+ * @param account the account name
+ * @return the total number of likes for all the posts of the account with the given account name
+ */
+public int getNumLikes(String account) {
+    BSTNode node = getAccount(account);
+    int totalLikes = 0;
+    if (node != null) {
+        for (int i = 0; i < node.posts.size(); i++) {
+            totalLikes += node.posts.get(i).numLikes;
+        }
+    }
+    return totalLikes;
+}
+/**
+ * This method returns the account name with the highest number of total likes across all of its posts.
+ * If there are multiple accounts with the same highest number of total likes, the method returns the first account found.
+ * @return the account name with the highest number of total likes across all of its posts
+ */
+public String getMostPopularAccount() {
+    String mostPopularAccount = "";
+    int maxLikes = 0;
+    ArrayList<String> accounts = listAccounts();
+    for (int i = 0; i < accounts.size(); i++) {
+        int numLikes = getNumLikes(accounts.get(i));
+        if (numLikes > maxLikes) {
+            maxLikes = numLikes;
+            mostPopularAccount = accounts.get(i);
+        }
+    }
+    return mostPopularAccount;
+}
 
     public static void main(String[] args) {
         TiktokApp system = new TiktokApp();
